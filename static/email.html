@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>给我留言 · 胡英杰</title>
+    <meta name="description" content="给胡英杰留言，或直接发送邮件联系。">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="bgOverlay" aria-hidden="true"></div>
+
+    <!-- ============================ 顶部导航 ============================ -->
+    <nav class="navigationBar" id="navigationBar">
+        <a class="navBrand" href="index.html">胡英杰</a>
+
+        <button class="navToggle" id="navToggle" type="button"
+                aria-label="打开导航菜单" aria-expanded="false" aria-controls="navigationUl">
+            <span></span><span></span><span></span>
+        </button>
+
+        <ul class="navigationUl" id="navigationUl">
+            <li class="navigationLi">
+                <a class="navigation" href="index.html#experience">个人经历</a>
+            </li>
+            <li class="navigationLi">
+                <a class="navigation" href="index.html#skills">技能栈</a>
+            </li>
+            <li class="navigationLi">
+                <a class="navigation" href="index.html#portfolio">作品集</a>
+            </li>
+            <li class="navigationLi">
+                <a class="navigation" href="index.html#contact">联系方式</a>
+            </li>
+            <li class="navigationLi">
+                <a class="navigation is-active" href="email.html">给我留言</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ============================ 留言表单 ============================ -->
+    <main class="pageShell">
+        <div class="formCard">
+            <header class="formHead">
+                <h1>给我留言</h1>
+                <p>填好下面的表单点「发送」，会自动打开你的邮件客户端，内容已填好，点一下发送即可。</p>
+            </header>
+
+            <!-- 提交结果提示 -->
+            <div class="formAlert" id="formAlert" role="status" aria-live="polite"></div>
+
+            <!-- 本页无后端：提交由 js/email.js 拼装 mailto: 链接唤起邮件客户端 -->
+            <form id="messageForm" novalidate>
+                <div class="fieldRow">
+                    <div class="field" id="fieldName">
+                        <label for="inputName">称呼<span class="req">*</span></label>
+                        <input type="text" id="inputName" name="name" maxlength="30"
+                               placeholder="怎么称呼你？" autocomplete="name">
+                        <p class="fieldError" id="errorName">请填写你的称呼</p>
+                    </div>
+
+                    <div class="field" id="fieldEmail">
+                        <label for="inputEmail">邮箱<span class="req">*</span></label>
+                        <input type="email" id="inputEmail" name="email" maxlength="80"
+                               placeholder="name@example.com" autocomplete="email">
+                        <p class="fieldError" id="errorEmail">请填写正确的邮箱地址</p>
+                    </div>
+                </div>
+
+                <div class="field" id="fieldSubject">
+                    <label for="inputSubject">主题<span class="req">*</span></label>
+                    <input type="text" id="inputSubject" name="subject" maxlength="60"
+                           placeholder="想聊点什么？">
+                    <p class="fieldError" id="errorSubject">请填写主题</p>
+                </div>
+
+                <div class="field" id="fieldMessage">
+                    <label for="inputMessage">留言内容<span class="req">*</span></label>
+                    <textarea id="inputMessage" name="message" maxlength="500"
+                              placeholder="详细说说吧，不少于 10 个字～"></textarea>
+                    <p class="fieldError" id="errorMessage">留言内容不少于 10 个字</p>
+                    <p class="charCount" id="charCount">0 / 500</p>
+                </div>
+
+                <div class="formFoot">
+                    <a class="portfolioLink" href="index.html">← 返回主页</a>
+                    <button class="btn btnPrimary" id="submitBtn" type="submit">发送留言</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 兜底：邮件客户端没弹出时，直接复制邮箱 -->
+        <div class="backLinkRow">
+            <a class="backLink" href="mailto:486689805@qq.com">或者直接发邮件：486689805@qq.com</a>
+            <button class="copyChip" id="copyEmailBtn" type="button">
+                <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="11" height="11" rx="2"/>
+                        <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>
+                    </svg>
+                </span>
+                复制邮箱
+            </button>
+        </div>
+    </main>
+
+    <!-- 全局提示（复制成功等） -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- 内容数据源（提供收件邮箱等配置） -->
+    <script src="js/data.js"></script>
+    <script src="js/email.js"></script>
+</body>
+
+</html>

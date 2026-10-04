@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>胡英杰 · 个人主页</title>
+    <meta name="description" content="胡英杰-KINO 的个人网站 —— 个人经历、技能栈与作品集。">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <!-- 背景压暗遮罩，保证文字与玻璃卡片可读 -->
+    <div class="bgOverlay" aria-hidden="true"></div>
+
+    <!-- ============================ 顶部导航 ============================ -->
+    <nav class="navigationBar" id="navigationBar">
+        <a class="navBrand" href="#home">胡英杰</a>
+
+        <button class="navToggle" id="navToggle" type="button"
+                aria-label="打开导航菜单" aria-expanded="false" aria-controls="navigationUl">
+            <span></span><span></span><span></span>
+        </button>
+
+        <ul class="navigationUl" id="navigationUl">
+            <li class="navigationLi" id="navPersonalExperience">
+                <a class="navigation" href="#experience">个人经历</a>
+            </li>
+            <li class="navigationLi" id="navSkills">
+                <a class="navigation" href="#skills">技能栈</a>
+            </li>
+            <li class="navigationLi" id="navPortfolio">
+                <a class="navigation" href="#portfolio">作品集</a>
+            </li>
+            <li class="navigationLi" id="navContact">
+                <a class="navigation" href="#contact">联系方式</a>
+            </li>
+            <li class="navigationLi" id="navMessage">
+                <a class="navigation" href="email.html">给我留言</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- ============================ Hero ============================ -->
+        <!--
+            注意：本区块的姓名/简介/角色/头像会被 js/index.js 用 js/data.js 里的数据覆盖。
+            要改这些内容，请改 js/data.js 的 owner 字段，而不是这里。
+            这里保留静态内容是为了「JS 未加载时也有内容可看」以及 SEO。
+        -->
+        <section class="hero" id="home">
+            <div class="profilePhotoDiv" id="profilePhotoDiv">
+                <img class="profilePhotoImg" src="./src/profilePhoto.jpg" alt="胡英杰-KINO 的头像">
+            </div>
+
+            <h1 class="heroName" id="heroName">胡英杰</h1>
+            <p class="heroRole" id="heroRole" data-roles="全栈开发者,AI 狂热者,终身学习者"></p>
+            <p class="heroDesc" id="heroDesc">热爱把想法变成能跑起来的东西。习惯从零把一个项目从设计稿推到上线。</p>
+
+            <div class="heroActions">
+                <a class="btn btnPrimary" href="#portfolio">看看我的作品</a>
+                <a class="btn btnGhost" href="email.html">联系我</a>
+            </div>
+
+            <!-- 联系方式（首屏快捷入口，由 js/data.js 的 owner.contacts 渲染） -->
+            <div class="personalContact" id="personalContact"></div>
+
+            <button class="scrollHint" id="scrollHint" type="button" aria-label="向下滚动"></button>
+        </section>
+
+        <!-- ============================ 个人经历 ============================ -->
+        <section class="section" id="experience">
+            <div class="container">
+                <header class="sectionHead reveal">
+                    <span class="sectionKicker">Experience</span>
+                    <h2 class="sectionTitle">个人经历</h2>
+                    <p class="sectionSubtitle">一路走来的学习与项目轨迹</p>
+                </header>
+
+                <!-- 由 js/index.js 读取 js/data.js 的 experiences 渲染 -->
+                <div class="timeline" id="experienceTimeline"></div>
+            </div>
+        </section>
+
+        <!-- ============================ 技能栈 ============================ -->
+        <section class="section" id="skills">
+            <div class="container">
+                <header class="sectionHead reveal">
+                    <span class="sectionKicker">Skills</span>
+                    <h2 class="sectionTitle">技能栈</h2>
+                    <p class="sectionSubtitle">我常用的工具与技术</p>
+                </header>
+
+                <div class="skillGroups" id="skillGroups"></div>
+            </div>
+        </section>
+
+        <!-- ============================ 作品集 ============================ -->
+        <section class="section" id="portfolio">
+            <div class="container">
+                <header class="sectionHead reveal">
+                    <span class="sectionKicker">Portfolio</span>
+                    <h2 class="sectionTitle">作品集</h2>
+                    <p class="sectionSubtitle">做过的一些东西</p>
+                </header>
+
+                <!-- 分类筛选，由 js/index.js 依据作品分类自动生成 -->
+                <div class="filterBar" id="filterBar"></div>
+
+                <!--
+                    对于不同项目，我们在中间使用 -number- 来区分不同项目的不同组件 id，以免找不到相关组件
+                    例：portfolio-1-Title / portfolio-1-TechStack / portfolio-1-OverView
+                -->
+                <div class="portfolioParentDiv" id="portfolioDiv"></div>
+            </div>
+        </section>
+
+        <!-- ============================ 联系方式 ============================ -->
+        <section class="section" id="contact">
+            <div class="container">
+                <header class="sectionHead reveal">
+                    <span class="sectionKicker">Contact</span>
+                    <h2 class="sectionTitle">联系方式</h2>
+                    <p class="sectionSubtitle">点击卡片即可跳转，或点击右上角复制</p>
+                </header>
+
+                <div class="contactGrid" id="contactGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================ 页脚 ============================ -->
+    <footer class="siteFooter">
+        <p>© <span id="footerYear">2026</span> 胡英杰 · 用 HTML / CSS / JavaScript 手搓</p>
+        <p><a href="email.html">给我留言</a></p>
+    </footer>
+
+    <!-- 返回顶部 -->
+    <button class="backToTop" id="backToTop" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- 全局提示（复制成功等） -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- 内容数据源：改内容只需要改这个文件 -->
+    <script src="js/data.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
