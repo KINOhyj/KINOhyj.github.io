@@ -5,7 +5,7 @@
  *
  * 模块划分：
  *   1) 工具函数（含内联 SVG 图标表）
- *   2) 内容渲染（个人经历 / 技能栈 / 作品集 / 联系方式 / Hero）
+ *   2) 内容渲染（个人经历 / 作品集 / 联系方式 / Hero）
  *   3) 页面交互（导航、滚动高亮、进场动画、打字机、返回顶部、一键复制）
  *   4) 初始化
  *
@@ -163,52 +163,7 @@
         observeReveal(container.querySelectorAll(".reveal"));
     }
 
-    /* ---------- 3.2 技能栈 ---------- */
-    function renderSkills(container, groups) {
-        if (!container) return;
-        container.innerHTML = "";
-
-        if (!groups || !groups.length) {
-            container.appendChild(el("div", { class: "stateBox", text: "暂无技能数据" }));
-            return;
-        }
-
-        groups.forEach(function (group, gi) {
-            var card = el("section", {
-                class: "skillCard reveal",
-                style: "transition-delay:" + (gi * 80) + "ms"
-            });
-
-            card.appendChild(el("h3", { class: "skillCardHead" }, [
-                el("span", { class: "skillIcon", html: iconHTML(group.icon) }),
-                el("span", { text: group.group || "" })
-            ]));
-
-            (group.items || []).forEach(function (skill) {
-                var level = Math.max(0, Math.min(100, Number(skill.level) || 0));
-                var fill = el("div", { class: "skillFill", "data-level": level });
-                var bar = el("div", { class: "skillBar" }, [
-                    el("div", { class: "skillBarTop" }, [
-                        el("span", { text: skill.name || "" }),
-                        el("span", { text: level + "%" })
-                    ]),
-                    el("div", { class: "skillTrack" }, [fill])
-                ]);
-                card.appendChild(bar);
-            });
-
-            container.appendChild(card);
-        });
-
-        observeReveal(container.querySelectorAll(".reveal"));
-        observeSkillBars(container.querySelectorAll(".skillFill"));
-
-        // 渲染完成后立即补一次，避免兜底定时器早于渲染
-        revealInViewport();
-        fillSkillBarsInViewport();
-    }
-
-    /* ---------- 3.3 作品集 ---------- */
+    /* ---------- 3.2 作品集 ---------- */
     var allProjects = [];
     var activeCategory = "全部";
 
@@ -321,7 +276,7 @@
         });
     }
 
-    /* ---------- 3.4 联系方式（含一键复制） ---------- */
+    /* ---------- 3.3 联系方式（含一键复制） ---------- */
     function renderContacts(container, contacts) {
         if (!container) return;
         container.innerHTML = "";
@@ -427,20 +382,6 @@
         });
     }
 
-    /** 兜底填充：把当前落在视口内的技能条直接填到目标宽度。 */
-    function fillSkillBarsInViewport() {
-        var vh = window.innerHeight || document.documentElement.clientHeight;
-        var nodes = document.querySelectorAll(".skillFill:not([data-filled])");
-
-        Array.prototype.forEach.call(nodes, function (node) {
-            var rect = node.getBoundingClientRect();
-            if (rect.top < vh && rect.bottom > 0) {
-                node.setAttribute("data-filled", "1");
-                node.style.width = (node.getAttribute("data-level") || 0) + "%";
-            }
-        });
-    }
-
     /** 注册滚动进场观察器 */
     function observeReveal(nodes) {
         if (!nodes || !nodes.length) return;
@@ -464,33 +405,6 @@
         Array.prototype.forEach.call(nodes, function (n) { revealObserver.observe(n); });
     }
 
-    /** 技能条进入视口后再播放填充动画 */
-    function observeSkillBars(nodes) {
-        if (!nodes || !nodes.length) return;
-
-        var fill = function (node) {
-            if (node.getAttribute("data-filled")) return;
-            node.setAttribute("data-filled", "1");
-            node.style.width = (node.getAttribute("data-level") || 0) + "%";
-        };
-
-        if (!("IntersectionObserver" in window)) {
-            Array.prototype.forEach.call(nodes, fill);
-            return;
-        }
-
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    fill(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.35 });
-
-        Array.prototype.forEach.call(nodes, function (n) { observer.observe(n); });
-    }
-
     /** 绑定兜底：加载后与滚动时各跑一次（时间戳节流，不用 rAF） */
     function initRevealFallback() {
         var last = 0;
@@ -500,7 +414,6 @@
             if (now - last < 80) return;
             last = now;
             revealInViewport();
-            fillSkillBarsInViewport();
         };
 
         window.addEventListener("scroll", run, { passive: true });
@@ -662,13 +575,11 @@
         renderContacts($("contactGrid"), owner.contacts);
 
         renderExperiences($("experienceTimeline"), data.experiences);
-        renderSkills($("skillGroups"), data.skills);
         renderFilters($("filterBar"), data.projects);
         renderProjects($("portfolioDiv"), data.projects);
 
         // 渲染完毕后统一兜一次，保证首屏内容一定可见
         revealInViewport();
-        fillSkillBarsInViewport();
     }
 
     if (document.readyState === "loading") {

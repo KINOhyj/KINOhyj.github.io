@@ -11,7 +11,7 @@
 personalWebsite/
 ├── README.md               本文件
 └── static/
-    ├── index.html          首页（Hero / 个人经历 / 技能栈 / 作品集 / 联系方式）
+    ├── index.html          首页（Hero / 个人经历 / 作品集 / 联系方式）
     ├── email.html          留言页
     ├── css/
     │   └── index.css       全部样式（含设计令牌，两个页面共用）
@@ -36,7 +36,6 @@ personalWebsite/
 | 收留言的邮箱 | `owner.contactEmail` |
 | 联系方式卡片（GitHub / 邮箱 / QQ…） | `owner.contacts` |
 | 个人经历时间轴 | `experiences` |
-| 技能栈 | `skills` |
 | 作品集 | `projects` |
 
 ### ⚠️ 一个必须知道的坑
@@ -54,8 +53,6 @@ personalWebsite/
 
 **`experiences`** 里 `end` 填 `"至今"` 表示进行中；时间格式 `YYYY-MM`，
 前端会自动显示成「2025 年 1 月」。
-
-**`skills[].items[].level`** 是 0–100 的熟练度，前端会自动裁剪到该区间。
 
 **`projects[].category`** 会自动生成顶部的分类筛选按钮；
 只有一类时筛选栏会自动隐藏。`link` 留空则该卡片不显示「查看详情」。
@@ -128,7 +125,6 @@ python -m http.server 8000
 - 导航条滚动加重 + 当前区块自动高亮
 - 移动端汉堡菜单
 - 内容滚动进场动画（含 IntersectionObserver 失灵时的兜底）
-- 技能条进入视口后播放填充动画
 - 作品集按分类筛选
 - 联系方式卡片一键复制
 - 返回顶部按钮
