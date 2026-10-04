@@ -56,25 +56,11 @@ window.SITE_DATA = {
        ====================================================================== */
     experiences: [
         {
-            start: "2023-09",
+            start: "2024-09",
             end: "至今",              /* 进行中填 "至今" */
-            role: "本科在读 · 计算机相关专业",
-            org: "某大学",             /* ← 换成你的真实学校 */
-            desc: "系统学习数据结构、算法、计算机网络与操作系统，课余时间投入 Web 开发与 3D 可视化实践。"
-        },
-        {
-            start: "2024-03",
-            end: "2024-09",
-            role: "前端开发实习生",
-            org: "某互联网公司",        /* ← 换成你的真实公司 */
-            desc: "参与企业后台管理系统的组件库开发，负责表格、表单等通用组件的封装与文档维护，沉淀了一套可复用样式规范。"
-        },
-        {
-            start: "2025-01",
-            end: "2025-06",
-            role: "个人项目 · 3D 可视化方向",
-            org: "独立开发",
-            desc: "基于 Blender + Three.js 搭建在线模型预览方案，跑通了从建模、导出 GLB 到 Web 端渲染的完整链路。"
+            role: "本科在读 · 人工智能专业",
+            org: "上海应用技术大学",             /* ← 换成你的真实学校 */
+            desc: "系统学习数据结构、算法、计算机网络与操作系统，课余时间投入agent开发以及全栈开发实践。"
         }
     ],
 
@@ -91,38 +77,6 @@ window.SITE_DATA = {
             overview: "你正在看的这个页面。玻璃拟态风格，纯手写无框架，包含作品集动态渲染与留言表单校验。",
             link: "https://github.com/KINOhyj",
             updatedAt: "2026-10-04"
-        },
-        {
-            title: "Blender 批量导出工具",
-            category: "3D",
-            techStack: ["Blender", "Python"],
-            overview: "为 Blender 编写的批处理插件，支持按场景集合批量导出 GLB/FBX 并自动规范命名，减少重复劳动。",
-            link: "https://github.com/KINOhyj",
-            updatedAt: "2026-08-21"
-        },
-        {
-            title: "在线模型预览器",
-            category: "Web",
-            techStack: ["Three.js", "Vite"],
-            overview: "浏览器端 GLB 模型预览方案，支持轨道控制、材质切换与环境光预设，用于快速检查导出结果。",
-            link: "https://github.com/KINOhyj",
-            updatedAt: "2026-06-15"
-        },
-        {
-            title: "数据看板组件库",
-            category: "Web",
-            techStack: ["Vue", "ECharts"],
-            overview: "面向后台系统的图表组件集合，统一了主题变量与响应式规则，支持暗色模式一键切换。",
-            link: "https://github.com/KINOhyj",
-            updatedAt: "2026-03-02"
-        },
-        {
-            title: "桌面端小工具集",
-            category: "Tool",
-            techStack: ["Python", "PyQt"],
-            overview: "把日常重复操作打包成桌面小工具：文件批量重命名、图片压缩、剪贴板历史，一把梭。",
-            link: "https://github.com/KINOhyj",
-            updatedAt: "2025-12-11"
         }
     ]
 };
